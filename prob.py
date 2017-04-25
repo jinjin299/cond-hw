@@ -66,3 +66,34 @@ for i in range(3):
     print ""
 print "0.707106781187 menas sqrt(2)/2"
 print "The small number means 0"
+
+# Problem 7 (c)
+for i in range(3):
+    print ""
+
+s = "{"
+for ny in range(1,-2,-1):
+    for my in range(1,-2,-1):
+        for ly in range(1,-2,-1):
+            s += "{"
+            for nx in range(1,-2,-1):
+                for mx in range(1,-2,-1):
+                    for lx in range(1,-2,-1):
+                        if (nx == ny) and (mx == my) and (lx == ly):
+                            s += "1/2 ((kx + %d)^2 + (ky + %d)^2 + (kz + %d)^2)," % (nx, mx, lx)
+
+                        else:
+                            tmp = Vec(nx-ny, mx-my, lx-ly)
+                            c = 0 
+                            if tmp.n == 3:
+                                c = -0.23
+                            if tmp.n == 8:
+                                c = 0.01
+                            if tmp.n == 11:
+                                c = 0.06
+                            s += "%0.6le," % (c * cos(pi/4 * tmp.dot(Vec(1,1,1))))
+            s = s[:-1]
+            s += "},"
+
+s = s[:-1] + "}"
+print s
